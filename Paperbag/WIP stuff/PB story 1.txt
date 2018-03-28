@@ -1,0 +1,66 @@
+
+WORLD:
+*Sci-Fi Ancient / SteamPunk universe*
+(Steampunk romans and greeks are a thing here)
+with different humanoid(?) races trying to coexists with eachother and many different factions
+
+For now to make work easy we will focus on those:
+
+Humans - Most common race in the world, boooooring
+
+Elfs - arrogat and long living race, they want to keep the world pure
+
+Anturians - Race of people living on the desert, they love selling you stuff you dont need but you buy anyway 
+
+yoshan'hvans - wierd, alien looking race of anthropods/ant thingies. They breed fast but are kinda weak even compared to humans, they sucks at technology
+
+Dwarfs - race of dwarfs prefering to live under the high mountains. They loves gold, beer and killin with thier heavy weapons build from the best metals avaible.
+
+Manborgs - more a machine than human at this points, manborgs worship the technology god Boltannon
+
+Bohran - many different humanoid bigcat races varying in size and abilities loving high technology - solitary and rare
+
+Wolfs - the mighty wolfs, protectors of the forests and rivers. Social and powerfull creatures wild in heart
+
+FACTIONS:
+
+|| High Elf council - arrogant and long living elf race TODO
+
+|| Dwarfs of the north - TODO
+
+|| Yoshan'hvans swarm - TODO
+
+|| Technocracy of Eden - TODO
+
+|| Undead Horde - They are comming! Run! TODO
+
+|| Suntallons - preety much africans TODO
+
+|| West Empire - expansive empire similar in style to romans. Except they have mechs and steam power obviously.
+They excell in producting high quality foot soldiers. They can build structures faster and cheaper then any other factions. 
++ Structure build speed and reducted cost
++ Better infantry units
+> Leader: The Emperor CRISPUS - the old curly haired and wise man trying to expand his empire further and further
+
+|| Tupor Pack - gigantic pack of wolves (and other friendly pops) with government basicaly leaded by alpha
+
+|| Bohran Alliance [Like supreme commander cybrans] - time of endless wars has come to end between different kinds of Bohrans.
+Bohr Steelclaw - a young leopard - managed to unite all those wild solitary animals under one name and idea. They call themselves Bohrans to this day.
+United they managed to overcome thier lack in numbers by high technology and stealth.
++ Access to unique technologies
++ Better units
++ utilise stealth
+- reduced population
+- higher living standards
+> Leader: Gonharg Rarrport - Old Lion that knows the value of technology
+
+STORY:
+
+Your village has been rided by the cult jupiter mercenaries - ruthless sect of technology worshiping priests. (Game workshop please dont sue us)
+We decided to not pay them thier "safety" tribute this time so we will be able to flee this place in search of new home.
+As we were loading the cargo onto our ship, we got attacked by surprise. Most men capable of defending us were working in the mines at this time.
+Only few survived the merciless attack onboard the ship that managed to escape only slightly damaged.
+Previous village chief has been killed in this raid.
+Now you has been choosen as the new leader - you are now the Chief Seraphim Paperbag (you can choose your last name for differend starting techs). Now the most important decision lays in your hands.
+Should we stay and rebuild the village before they come back or should we sail the sea in search of new home ?
+

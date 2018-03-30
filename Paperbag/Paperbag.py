@@ -10,6 +10,7 @@ import random
 #paperbag modules
 import inputevents
 import graph
+import gui
 
 
 ##import math
@@ -40,13 +41,6 @@ def program_loop():
     #Set up events
 
     BgSMF = -2200
-
-    #basic font thingy - needs to be moved to gui lib
-    def text_object( Surface, Text, Font, Color, X, Y ):
-        #                                              V String Escape! 
-        Font = pygame.font.Font(os.path.join("content\\fonts", Font ), 115)
-        Surface = Font.render(Text, False, Color, None)
-        gameDisplay.blit(Surface,(X,Y))
         
 
     #Load temp images
@@ -103,7 +97,8 @@ def program_loop():
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, 0  )
+        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, BgSMF/10  )
+        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", display_width, display_height, None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
         FontList = [
             "ARCADE.TTF",
             "VTCBelialsBlade.ttf",
@@ -123,24 +118,43 @@ def program_loop():
             "YES!.ttf"
             ]
         #draw main menu title
-        text_object( gameDisplay, "paperbag "+str(clock.get_time()), random.choice(FontList), (255,255,255),100,100 )
+        gui.text_object( gameDisplay, 115, "paperbag", "Ye Olde Oak.ttf", (255,255,255), (100,100) )   #random.choice(FontList)
+        #version
+        gui.text_object( gameDisplay, 30, "Version: GUI_test 0.1", "ARCADE.TTF", (255,255,255), (100,220) )   #random.choice(FontList)
+        #paper bag head
+        graph.DrawSprite( gameDisplay, 600, 100, "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")), 120, 160, None, None, 20, 90  )
 
         if inputevents.isKeyPressed(97):
             BgSMF += 10
         
         BgSMF += 2
 
+        #dummy main menu buttons
+        colors = ["New game", "Load Game", "Enter Code", "Set Operator Mode",]
+        i = 0
+        while i < len(colors):
+            print(colors[i])
+            i += 1
+        gui.text_object( gameDisplay, 50, "New game", "wagerlos.ttf", (255,255,255), (120,300) )
+        gui.text_object( gameDisplay, 50, "Load Game", "wagerlos.ttf", (255,255,255), (120,340) )
+        gui.text_object( gameDisplay, 50, "Enter Code", "wagerlos.ttf", (255,255,255), (120,380) )
+        gui.text_object( gameDisplay, 50, "Set Operator Mode", "wagerlos.ttf", (255,255,255), (120,420) )
+        gui.text_object( gameDisplay, 50, "Arcade System Options", "wagerlos.ttf", (255,255,255), (120,460) )
+        gui.text_object( gameDisplay, 50, "Credits", "wagerlos.ttf", (255,255,255), (120,500) )
+
+        #debug text stuffs
         PressedKeys = inputevents.getPressedKeys()
         str1 = ''.join(str(e) for e in PressedKeys)
-
-        text_object( gameDisplay, str1, "Warlords.ttf", (255,255,255),100,100 )
+        gui.text_object( gameDisplay, 20, "Pressed Buttons: ", "Warlords.ttf", (255,255,255), (10,20) )
+        gui.text_object( gameDisplay, 20, str1, "Warlords.ttf", (255,255,255), (10,40) )
+        gui.text_object( gameDisplay, 20, "Time: "+str(clock.get_time()), "Warlords.ttf", (255,255,255), (10,60) )
         ###gameDisplay.blit(SplashScreen,(0,0))
         
         #UPDATE SURFACE
         pygame.display.update()
 
         #FPS settings
-        clock.tick( 3 )
+        clock.tick( 60 )
 
 
     #gameDisplay.blit(pygame.image.load(os.path.join("content\img","ERROR.png")),(100,100))

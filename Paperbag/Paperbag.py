@@ -39,7 +39,15 @@ def program_loop():
 
     #Set up events
 
-    Succ = 0
+    BgSMF = -2200
+
+    #basic font thingy - needs to be moved to gui lib
+    def text_object( Surface, Text, Font, Color, X, Y ):
+        #                                              V String Escape! 
+        Font = pygame.font.Font(os.path.join("content\\fonts", Font ), 115)
+        Surface = Font.render(Text, False, Color, None)
+        gameDisplay.blit(Surface,(X,Y))
+        
 
     #Load temp images
     SplashScreen = pygame.image.load(os.path.join("content\img","splashscreen.png"))
@@ -91,13 +99,25 @@ def program_loop():
                 
 
         #fill screen with black color
+        #gray for now so i can see layout
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", display_width, display_height, None, None, 100+Succ/3, 100+Succ  )
+        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, 0  )
+
+        #draw main menu title
+        text_object( gameDisplay, "paperbag", "Warlords.ttf", (255,255,255),100,100 )
+
+        if inputevents.isKeyPressed(97):
+            BgSMF += 10
         
-        Succ = 100*math.sin(clock.get_time()/100)
-        gameDisplay.blit(SplashScreen,(0,0))
+        BgSMF += 2
+
+        PressedKeys = inputevents.getPressedKeys()
+        str1 = ''.join(str(e) for e in PressedKeys)
+
+        text_object( gameDisplay, str1, "Warlords.ttf", (255,255,255),100,100 )
+        ###gameDisplay.blit(SplashScreen,(0,0))
         
         #UPDATE SURFACE
         pygame.display.update()

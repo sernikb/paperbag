@@ -104,9 +104,26 @@ def program_loop():
 
         #render splash screen
         graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, 0  )
-
+        FontList = [
+            "ARCADE.TTF",
+            "VTCBelialsBlade.ttf",
+            "VTCBelialsBlade3d.ttf",
+            "VTCBelialsBladeItalic.ttf",
+            "VTCBelialsBladeShadow.ttf",
+            "VTCBelialsBladeTricked.ttf",
+            "wager.ttf",
+            "wagerlos.ttf",
+            "wagerwon.ttf",
+            "Warlords.ttf",
+            "Werbedeutsch.ttf",
+            "Will-Harris.ttf",
+            "XAyax.ttf",
+            "XAyaxOutline.ttf",
+            "Ye Olde Oak.ttf",
+            "YES!.ttf"
+            ]
         #draw main menu title
-        text_object( gameDisplay, "paperbag", "Warlords.ttf", (255,255,255),100,100 )
+        text_object( gameDisplay, "paperbag "+str(clock.get_time()), random.choice(FontList), (255,255,255),100,100 )
 
         if inputevents.isKeyPressed(97):
             BgSMF += 10
@@ -123,7 +140,7 @@ def program_loop():
         pygame.display.update()
 
         #FPS settings
-        clock.tick( 60 )
+        clock.tick( 3 )
 
 
     #gameDisplay.blit(pygame.image.load(os.path.join("content\img","ERROR.png")),(100,100))

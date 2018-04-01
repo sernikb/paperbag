@@ -130,24 +130,18 @@ def program_loop():
         BgSMF += 2
 
         #dummy main menu buttons
-        colors = ["New game", "Load Game", "Enter Code", "Set Operator Mode",]
+        MenuButtons = ["New game", "Load Game", "Enter Code", "Set Operator Mode",]
         i = 0
-        while i < len(colors):
-            print(colors[i])
+        while i < len(MenuButtons):
+            gui.text_object( gameDisplay, 50, MenuButtons[i], "wagerlos.ttf", (255,255,255), (120,300+(i*60)) )
             i += 1
-        gui.text_object( gameDisplay, 50, "New game", "wagerlos.ttf", (255,255,255), (120,300) )
-        gui.text_object( gameDisplay, 50, "Load Game", "wagerlos.ttf", (255,255,255), (120,340) )
-        gui.text_object( gameDisplay, 50, "Enter Code", "wagerlos.ttf", (255,255,255), (120,380) )
-        gui.text_object( gameDisplay, 50, "Set Operator Mode", "wagerlos.ttf", (255,255,255), (120,420) )
-        gui.text_object( gameDisplay, 50, "Arcade System Options", "wagerlos.ttf", (255,255,255), (120,460) )
-        gui.text_object( gameDisplay, 50, "Credits", "wagerlos.ttf", (255,255,255), (120,500) )
 
         #debug text stuffs
         PressedKeys = inputevents.getPressedKeys()
-        str1 = ''.join(str(e) for e in PressedKeys)
+        str1 = ' '.join(str(e) for e in PressedKeys)
         gui.text_object( gameDisplay, 20, "Pressed Buttons: ", "Warlords.ttf", (255,255,255), (10,20) )
         gui.text_object( gameDisplay, 20, str1, "Warlords.ttf", (255,255,255), (10,40) )
-        gui.text_object( gameDisplay, 20, "Time: "+str(clock.get_time()), "Warlords.ttf", (255,255,255), (10,60) )
+        gui.text_object( gameDisplay, 20, " FPS: "+str(round(clock.get_fps(),1))+" Time: "+str(clock.get_time()), "Warlords.ttf", (255,255,255), (10,60) )
         ###gameDisplay.blit(SplashScreen,(0,0))
         
         #UPDATE SURFACE

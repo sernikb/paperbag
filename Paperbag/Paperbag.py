@@ -17,18 +17,14 @@ import json
 with open('data.json') as json_data:
     data = json.load(json_data)
 
-out = data['version']
-print(out)
-
-
 
 #import math
 
 
 def program_loop():
 
-    display_width = 1200
-    display_height = 800
+
+
 
     #ID of the displayed menus
     # 1 = splash screen
@@ -36,8 +32,8 @@ def program_loop():
     Menu_ID = 1
 
     pygame.init()
-    gameDisplay = pygame.display.set_mode((display_width,display_height))
-    pygame.display.set_caption("paperbag: call for revenge")
+    gameDisplay = pygame.display.set_mode((data['display']['width'],data['display']['height']))
+    pygame.display.set_caption(data['window_title'])
 
     #set icon
     pygame.display.set_icon( pygame.image.load(os.path.join("content\img","icon.png")) )
@@ -107,8 +103,8 @@ def program_loop():
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, BgSMF/10  )
-        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", display_width, display_height, None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
+        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", data['display']['width'], data['display']['height'], None, None, -BgSMF, BgSMF/10  )
+        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", data['display']['width'], data['display']['height'], None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
         FontList = [
             "ARCADE.TTF",
             "VTCBelialsBlade.ttf",

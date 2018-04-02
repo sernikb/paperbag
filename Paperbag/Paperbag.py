@@ -12,8 +12,17 @@ import inputevents
 import graph
 import gui
 
+import json
 
-##import math
+with open('data.json') as json_data:
+    data = json.load(json_data)
+
+out = data['version']
+print(out)
+
+
+
+#import math
 
 
 def program_loop():
@@ -121,7 +130,7 @@ def program_loop():
         #draw main menu title
         gui.text_object( gameDisplay, 115, "paperbag", "Ye Olde Oak.ttf", (255,255,255), (100,100) )   #random.choice(FontList)
         #version
-        gui.text_object( gameDisplay, 30, "Version: GUI_test 0.1", "ARCADE.TTF", (255,255,255), (100,220) )   #random.choice(FontList)
+        gui.text_object( gameDisplay, 30, "Version: " + data['version'], "ARCADE.TTF", (255,255,255), (100,220) )   #random.choice(FontList)
         #paper bag head
         graph.DrawSprite( gameDisplay, 600, 100, "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")), 120, 160, None, None, 20, 90  )
 

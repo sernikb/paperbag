@@ -7,24 +7,29 @@ import os
 
 SpriteLoadedText = []
 
-class GUIMainMenuButton:
+#this is a button 
+class GUIMenuButton:
 
     IsGUI = True
-    IsMainMenu = True
-    
 
-    def __init__(self, name):
+    def __init__(self, name, POS):
+        # Call the parent class (Sprite) constructor
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = pygame.Surface(POS)
+        self.image.fill((255,150,100))
+
+        # Fetch the rectangle object that has the dimensions of the image
+        # Update the position of this object by setting the values of rect.x and rect.y
+        self.rect = self.image.get_rect()
+        
         self.name = "Main Menu Button"
         self.texture = "ERROR.png"
-        self.size = (100,500)
-
-    def set_texture(self, trick):
-        self.tricks.append(trick)
 
 
 #basic text object
 def text_object( Surface, Size, Text, Font, Color, POS ):
-        #                                              V String Escape! 
+        #                                               V String Escape! 
         FontObj = pygame.font.Font(os.path.join("content\\fonts", Font ), Size)
 
         LoadedSurface = False

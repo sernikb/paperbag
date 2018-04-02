@@ -98,8 +98,8 @@ def program_loop():
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, BgSMF/10  )
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", display_width, display_height, None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
+        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", display_width, display_height, None, None, -BgSMF, BgSMF/10  )
+        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", display_width, display_height, None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
         FontList = [
             "ARCADE.TTF",
             "VTCBelialsBlade.ttf",
@@ -130,12 +130,14 @@ def program_loop():
         
         BgSMF += 2
 
-        #dummy main menu buttons
-        MenuButtons = ["New game", "Load Game", "Enter Code", "Set Operator Mode",]
+        #main menu buttons
+        MenuButtons = ["New game", "Load Game", "Enter Code", "Set Operator Mode","Exit"]
         i = 0
         while i < len(MenuButtons):
             gui.text_object( gameDisplay, 50, MenuButtons[i], "wagerlos.ttf", (255,255,255), (120,300+(i*60)) )
             i += 1
+
+        Button = gui.GUIMenuButton( "Test button", (300,300)) 
 
         #debug text stuffs
         PressedKeys = inputevents.getPressedKeys()

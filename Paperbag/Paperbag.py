@@ -17,13 +17,16 @@ import json
 with open('data.json') as json_data:
     data = json.load(json_data)
 
+#variable used to run things only once on startup
+IsFirst_Program_Loop = True
 
-#import math
-
+#stuff that happens before first loop here
+def setup():
+    pass
+    
 
 def program_loop():
-
-
+    global IsFirst_Program_Loop
 
 
     #ID of the displayed menus
@@ -43,7 +46,7 @@ def program_loop():
 
     _EXIT = False
 
-    #Set up events
+    #Set up evesurfacents
 
 
     BgSMF = -2200
@@ -64,7 +67,7 @@ def program_loop():
             ##QUIT             none
             ##ACTIVEEVENT      gain, state
             ##KEYDOWN          unicode, key, mod
-            ##KEYUP            key, mod
+            ##KEYUP           gameDisplay key, mod
             ##MOUSEMOTION      pos, rel, buttons
             ##MOUSEBUTTONUP    pos, button
             ##MOUSEBUTTONDOWN  pos, button
@@ -73,7 +76,7 @@ def program_loop():
             ##JOYHATMOTION     joy, hat, value
             ##JOYBUTTONUP      joy, button
             ##JOYBUTTONDOWN    joy, button
-            ##VIDEORESIZE      size, w, h
+            ##VIDEORESIZsurfaceE      size, w, h
             ##VIDEOEXPOSE      none
             ##USEREVENT        code
 
@@ -88,7 +91,7 @@ def program_loop():
             if event.type == pygame.KEYDOWN:
                 key = event.key
                 inputevents.addKeyEv(key)
-                
+                surface
             #chandle key presses KEYUP
             if event.type == pygame.KEYUP:
                 key = event.key
@@ -98,19 +101,19 @@ def program_loop():
             #print(event)
                 
 
-        #fill screen with black color
+        #fill screen witsurfaceh black color
         #gray for now so i can see layout
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", data['display']['width'], data['display']['height'], None, None, -BgSMF, BgSMF/10  )
-        #graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", data['display']['width'], data['display']['height'], None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
+        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", data['display']['width'], data['display']['height'], None, None, -BgSMF, BgSMF/10  )
+        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", data['display']['width'], data['display']['height'], None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
         FontList = [
             "ARCADE.TTF",
             "VTCBelialsBlade.ttf",
             "VTCBelialsBlade3d.ttf",
             "VTCBelialsBladeItalic.ttf",
-            "VTCBelialsBladeShadow.ttf",
+            "VTCBelialsBsurfaceladeShadow.ttf",
             "VTCBelialsBladeTricked.ttf",
             "wager.ttf",
             "wagerlos.ttf",
@@ -120,7 +123,7 @@ def program_loop():
             "Will-Harris.ttf",
             "XAyax.ttf",
             "XAyaxOutline.ttf",
-            "Ye Olde Oak.ttf",
+            "Ye Olde Oaksurface.ttf",
             "YES!.ttf"
             ]
         #draw main menu title
@@ -140,10 +143,19 @@ def program_loop():
         i = 0
         while i < len(MenuButtons):
             gui.text_object( gameDisplay, 50, MenuButtons[i], "wagerlos.ttf", (255,255,255), (120,300+(i*60)) )
-            i += 1
-
-        Button = gui.GUIMenuButton( "Test button", (300,300)) 
-
+            i += 1 
+		
+		
+        #Sprite rendering and update test
+        if IsFirst_Program_Loop == True:
+            GUIs = pygame.sprite.Group()# define a group
+            Button1 = gui.GUIMenuButton()
+            GUIs.add(Button1)# add an instance of car to group
+        
+        GUIs.update() #calls the update function on all sprites in group
+        GUIs.draw(gameDisplay) #draws all sprites in the group
+		
+		
         #debug text stuffs
         PressedKeys = inputevents.getPressedKeys()
         str1 = ' '.join(str(e) for e in PressedKeys)
@@ -158,12 +170,13 @@ def program_loop():
         #FPS settings
         clock.tick( 60 )
 
-
-    #gameDisplay.blit(pygame.image.load(os.path.join("content\img","ERROR.png")),(100,100))
-
-
+        #End of program loop
+        IsFirst_Program_Loop = False
 
 
+
+
+setup()
 program_loop()
 pygame.quit()
 quit()

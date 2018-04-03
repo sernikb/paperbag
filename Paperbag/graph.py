@@ -12,7 +12,7 @@ ERROR_IMAGE = pygame.image.load(os.path.join("content\img","error.png"))
 
 def DrawSprite( display, posX, posY, Texture, SizeX, SizeY, Rescale, Rotation, Tx, Ty ):
     #THIS IS A VERY HEAVY FUNCTION - NEEDS OPTIMALISATION IN THE FUTURE
-    #Tx and Ty are Tiles cordinatess for animations and different sprites
+    #Tx and Ty are Tiles cordinatess for animations and skins
 
     #convert to float
     Tx = int(Tx)

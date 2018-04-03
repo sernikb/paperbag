@@ -4,27 +4,27 @@
 import pygame
 import graph
 import os
+import math
 
 SpriteLoadedText = []
 
 #this is a button 
-class GUIMenuButton:
+class GUIMenuButton(pygame.sprite.Sprite):
 
-    IsGUI = True
-
-    def __init__(self, name, POS):
-        # Call the parent class (Sprite) constructor
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = pygame.Surface(POS)
-        self.image.fill((255,150,100))
-
-        # Fetch the rectangle object that has the dimensions of the image
-        # Update the position of this object by setting the values of rect.x and rect.y
-        self.rect = self.image.get_rect()
-        
-        self.name = "Main Menu Button"
-        self.texture = "ERROR.png"
+        def __init__(self):
+                pygame.sprite.Sprite.__init__(self) # necessary to initialize Sprite class
+                self.image = pygame.image.load(os.path.join("content\img","error.png"))
+                self.rect = self.image.get_rect() #define rect
+                self.rect.x = 300 # set up sprite location
+                self.rect.y = 300 # set up sprite location
+                self.startingPosX = self.rect.x
+                self.startingPosY = self.rect.y
+                self.tickCount = 0
+		
+        def update(self):
+                self.tickCount += 1
+                self.rect.x = self.startingPosX+1000*math.sin(self.tickCount/80)
+                print(str(self)+" is now alive for "+str(self.tickCount)+" ticks")
 
 
 #basic text object
@@ -56,7 +56,3 @@ def text_object( Surface, Size, Text, Font, Color, POS ):
         Surface.blit(TextSurface,POS)
         
 
-##class basic_button():
-##    def basic_button( surface, size , text, function, pos ):
-##    text_object( surface, size, text, "Warlords.ttf", (255,255,255), (pos[0],pos[1]) )
-    

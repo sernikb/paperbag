@@ -1,4 +1,4 @@
-#fuck you vidubel
+#created by sernikb and MichaelWill
 print(" ===================== START =====================")
 
 import pygame
@@ -87,15 +87,32 @@ def program_loop():
                 quit()
 
 
-            #chandle key presses KEYDOWN
+            #handle key presses KEYDOWN
             if event.type == pygame.KEYDOWN:
                 key = event.key
                 inputevents.addKeyEv(key)
-                surface
-            #chandle key presses KEYUP
+            #handle key presses KEYUP
             if event.type == pygame.KEYUP:
                 key = event.key
                 inputevents.removeKeyEv(key)
+
+            #handle mouse motion
+            #MOUSEMOTION  pos, rel, buttons
+            if event.type == pygame.MOUSEMOTION:
+                print(event.rel)
+                print(event.pos)
+                print(event.buttons)
+                inputevents.addMousePos(event.pos)
+                
+            #handle mouse key up
+            #MOUSEBUTTONUP  pos, button
+            if event.type == pygame.MOUSEBUTTONUP:
+                inputevents.removeMouseClick(event.button)
+
+            #handle mouse key down
+            #MOUSEBUTTONDOWN  pos, button
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                inputevents.addMouseClick(event.button,event.pos)
 
             #if event.event_name == "main_menu":
             #print(event)
@@ -157,7 +174,7 @@ def program_loop():
 		
 		
         #debug text stuffs
-        PressedKeys = inputevents.getPressedKeys()
+        PressedKeys = inputevents.getPressedKeys() + inputevents.getPressedMouseKeys()
         str1 = ' '.join(str(e) for e in PressedKeys)
         gui.text_object( gameDisplay, 20, "Pressed Buttons: ", "Warlords.ttf", (255,255,255), (10,20) )
         gui.text_object( gameDisplay, 20, str1, "Warlords.ttf", (255,255,255), (10,40) )

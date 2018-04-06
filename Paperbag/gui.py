@@ -5,11 +5,12 @@ import pygame
 import graph
 import os
 import math
+import inputevents
 
 SpriteLoadedText = []
 
 #this is a button 
-class GUIMenuButton(pygame.sprite.Sprite):
+class GUISpriteElement(pygame.sprite.Sprite):
 
         def __init__(self):
                 pygame.sprite.Sprite.__init__(self) # necessary to initialize Sprite class
@@ -20,11 +21,31 @@ class GUIMenuButton(pygame.sprite.Sprite):
                 self.startingPosX = self.rect.x
                 self.startingPosY = self.rect.y
                 self.tickCount = 0
+
+        def set_target_surface( self, target_surface ):
+                self.surface = target_surface
+
+        def set_image( self, image ):
+                self.image = pygame.image.load(os.path.join("content\img",image))
+
+        def set_pos( self, pos ): 
+                self.rect.x = pos[0]
+                self.rect.y = pos[1]
+                #reset starting pos too!
+                self.startingPosX = self.rect.x
+                self.startingPosY = self.rect.y
 		
         def update(self):
                 self.tickCount += 1
-                self.rect.x = self.startingPosX+1000*math.sin(self.tickCount/80)
-                print(str(self)+" is now alive for "+str(self.tickCount)+" ticks")
+                self.rect.x = self.startingPosX+20*math.sin(self.tickCount/8)
+                self.rect.y = self.startingPosY-10*math.sin(self.tickCount/6)
+                #print(str(self)+" is now alive for "+str(self.tickCount)+" ticks")
+
+                #if clicked by mouse - test
+                pos = inputevents.getMousePos()
+                if self.rect.collidepoint(inputevents.getMousePos()) and inputevents.isMouseKeyPressed("Left Mouse button"):
+                        text_object( self.surface, 115, "CLICKED!", "Ye Olde Oak.ttf", (255,255,255), pos )
+                
 
 
 #basic text object

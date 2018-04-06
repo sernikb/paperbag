@@ -43,17 +43,14 @@ def translateMouseID(ID):
              KeyName = "Right Mouse button"   
         return KeyName
 
-def addMouseClick(button,pos):
-        print(pygame.key.name(button))
+def addMouseClick(button):
         MouseButtons.append(translateMouseID(button))
-        if pos:
-                MousePos = pos
 
 def addMousePos(pos):
+        global MousePos
         MousePos = pos
 
 def removeMouseClick(button):
-        print(pygame.key.name(button))
         MouseButtons.remove(translateMouseID(button))
         
 def getMousePos():

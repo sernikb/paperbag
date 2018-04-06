@@ -99,9 +99,6 @@ def program_loop():
             #handle mouse motion
             #MOUSEMOTION  pos, rel, buttons
             if event.type == pygame.MOUSEMOTION:
-                print(event.rel)
-                print(event.pos)
-                print(event.buttons)
                 inputevents.addMousePos(event.pos)
                 
             #handle mouse key up
@@ -112,7 +109,7 @@ def program_loop():
             #handle mouse key down
             #MOUSEBUTTONDOWN  pos, button
             if event.type == pygame.MOUSEBUTTONDOWN:
-                inputevents.addMouseClick(event.button,event.pos)
+                inputevents.addMouseClick(event.button)
 
             #if event.event_name == "main_menu":
             #print(event)
@@ -147,8 +144,8 @@ def program_loop():
         gui.text_object( gameDisplay, 115, "paperbag", "Ye Olde Oak.ttf", (255,255,255), (100,100) )   #random.choice(FontList)
         #version
         gui.text_object( gameDisplay, 30, "Version: " + data['version'], "ARCADE.TTF", (255,255,255), (100,220) )   #random.choice(FontList)
-        #paper bag head
-        graph.DrawSprite( gameDisplay, 600, 100, "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")), 120, 160, None, None, 20, 90  )
+        #paper bag head (OLD and Lagy)
+        ##graph.DrawSprite( gameDisplay, 600, 100, "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")), 120, 160, None, None, 20, 90  )
 
         if inputevents.isKeyPressed(97):
             BgSMF += 10
@@ -165,9 +162,16 @@ def program_loop():
 		
         #Sprite rendering and update test
         if IsFirst_Program_Loop == True:
+
             GUIs = pygame.sprite.Group()# define a group
-            Button1 = gui.GUIMenuButton()
-            GUIs.add(Button1)# add an instance of car to group
+
+            #paper bag head
+            PaperbagHead = gui.GUISpriteElement()
+            PaperbagHead.set_target_surface( gameDisplay )
+            PaperbagHead.set_image( "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")) )
+            PaperbagHead.set_pos( (560,100) )
+            GUIs.add(PaperbagHead)# add an instance of car to group
+            
         
         GUIs.update() #calls the update function on all sprites in group
         GUIs.draw(gameDisplay) #draws all sprites in the group

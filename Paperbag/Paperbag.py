@@ -7,6 +7,7 @@ import pygame.gfxdraw
 import os
 import math
 import random
+import sqlite3
 #paperbag modules
 import inputevents
 import graph
@@ -22,7 +23,23 @@ IsFirst_Program_Loop = True
 
 #stuff that happens before first loop here
 def setup():
-    pass
+
+    #databases test
+    con = sqlite3.connect(":memory:")
+    cur = con.cursor()
+    cur.execute("create table people (name_last, age)")
+
+    who = "Yeltsin"
+    age = 72
+
+    # This is the qmark style:
+    cur.execute("insert into people values (?, ?)", (who, age))
+
+    # And this is the named style:
+    cur.execute("select * from people where name_last=:who and age=:age", {"who": who, "age": age})
+
+    print("> SQLite3 test:")
+    print(cur.fetchone())
     
 
 def program_loop():
@@ -120,8 +137,9 @@ def program_loop():
         gameDisplay.fill((10,10,10))
 
         #render splash screen
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", data['display']['width'], data['display']['height'], None, None, -BgSMF, BgSMF/10  )
-        graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", data['display']['width'], data['display']['height'], None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
+        ## it was too laggy so i need to disable it!
+        ## graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern2.png", data['display']['width'], data['display']['height'], None, None, -BgSMF, BgSMF/10  )
+        ## graph.DrawSprite( gameDisplay, 0.01, 0, "clouds_bg_pattern.png", data['display']['width'], data['display']['height'], None, None, -BgSMF+BgSMF/10, BgSMF/10+BgSMF/10  )
         FontList = [
             "ARCADE.TTF",
             "VTCBelialsBlade.ttf",
@@ -147,30 +165,65 @@ def program_loop():
         #paper bag head (OLD and Lagy)
         ##graph.DrawSprite( gameDisplay, 600, 100, "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")), 120, 160, None, None, 20, 90  )
 
+        #background thingy movement control (for testing)
         if inputevents.isKeyPressed(97):
             BgSMF += 10
         
         BgSMF += 2
 
-        #main menu buttons
-        MenuButtons = ["New game", "Load Game", "Enter Code", "Set Operator Mode","Exit"]
-        i = 0
-        while i < len(MenuButtons):
-            gui.text_object( gameDisplay, 50, MenuButtons[i], "wagerlos.ttf", (255,255,255), (120,300+(i*60)) )
-            i += 1 
 		
 		
-        #Sprite rendering and update test
+        # RUN ONLY ONE TIME
         if IsFirst_Program_Loop == True:
 
-            GUIs = pygame.sprite.Group()# define a group
+
+            GUIs = pygame.sprite.Group() # define a sprite group for guis
+            
+            # [X] START NEW GAME
+            def MENUStartNewGame():
+                gui.text_object( gameDisplay, 115, "MENUStartNewGame():", "Ye Olde Oak.ttf", (255,255,255), (100,100) )
+            # [X] DEF CONNECT TO SERVER
+            def MENUConnectToServer():
+                gui.text_object( gameDisplay, 115, "MENUConnectToServer()", "Ye Olde Oak.ttf", (255,255,255), (100,100) )
+            # [X] OPTIONS
+            def MENUOptions():
+                gui.text_object( gameDisplay, 115, "MENUOptions()", "Ye Olde Oak.ttf", (255,255,255), (100,100) )
+            # [X] CREDITS
+            def MENUCredits():
+                gui.text_object( gameDisplay, 115, "MENUCredits()", "Ye Olde Oak.ttf", (255,255,255), (100,100) )
+            # [X] EXIT
+            def MENUExitTheGame():
+                _EXIT = True
+
+            #main menu buttons
+            MenuButtons = [("Start New Game",MENUStartNewGame()),
+                           ("Connect To Server",MENUConnectToServer()),
+                           ("Options",MENUOptions()),
+                           ("Credits",MENUCredits()),
+                           ("Exit",MENUExitTheGame())
+                           ]
+                
+            i = 0
+            while i < len(MenuButtons):
+
+                MButton = gui.GUIMainMenuButton()
+                MButton.set_target_surface( gameDisplay )
+                MButton.set_pos( (120,300+(i*60)) )
+                MButton.text = MenuButtons[i][0]
+                MButton.rebuild_Rectangle()
+                MButton.functionM1 = MenuButtons[i][1]
+                GUIs.add(MButton) # add an instance to group
+                ##gui.text_object( gameDisplay, 50, MenuButtons[i], "wagerlos.ttf", (255,255,255), (120,300+(i*60)) )
+                
+                i += 1
+
 
             #paper bag head
             PaperbagHead = gui.GUISpriteElement()
             PaperbagHead.set_target_surface( gameDisplay )
-            PaperbagHead.set_image( "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png")) )
+            PaperbagHead.set_image( "paperbag_head1.png" ) # "paperbag_head1"+random.choice((".png","_alt1.png","_alt2.png"))
             PaperbagHead.set_pos( (560,100) )
-            GUIs.add(PaperbagHead)# add an instance of car to group
+            GUIs.add(PaperbagHead) # add an instance to group
             
         
         GUIs.update() #calls the update function on all sprites in group
